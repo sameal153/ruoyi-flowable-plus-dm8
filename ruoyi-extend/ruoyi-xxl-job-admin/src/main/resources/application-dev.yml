@@ -1,0 +1,68 @@
+--- # 监控配置
+spring.boot.admin.client:
+  # 增加客户端开关
+  enabled: true
+  # 设置 Spring Boot Admin Server 地址
+  url: http://localhost:9090/admin
+  instance:
+    service-host-type: IP
+  username: ruoyi
+  password: 123456
+
+--- # 数据库配置
+spring:
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: dm.jdbc.driver.DmDriver
+    url: jdbc:dm://localhost:5236/PSPG_DEV?zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=utf-8
+    username: PSPG_DEV
+    password: 123456789
+    hikari:
+      auto-commit: true
+      connection-test-query: SELECT 1
+      connection-timeout: 10000
+      idle-timeout: 30000
+      max-lifetime: 900000
+      maximum-pool-size: 30
+      minimum-idle: 10
+      pool-name: HikariCP
+      validation-timeout: 1000
+
+--- # 邮件配置
+spring:
+  mail:
+    from: xxx@qq.com
+    host: smtp.qq.com
+    username: xxx@qq.com
+    password: xxx
+    port: 25
+    properties:
+      mail:
+        smtp:
+          auth: true
+          socketFactory:
+            class: javax.net.ssl.SSLSocketFactory
+          starttls:
+            enable: true
+            required: true
+--- # xxl-job 配置
+xxl.job:
+  # 执行器开关
+  enabled: false
+  # 调度中心地址：如调度中心集群部署存在多个地址则用逗号分隔。
+  admin-addresses: http://localhost:9100/xxl-job-admin
+  # 执行器通讯TOKEN：非空时启用
+  access-token: xxl-job
+  executor:
+    # 执行器AppName：执行器心跳注册分组依据；为空则关闭自动注册
+    appname: node-warning-executor
+    # 执行器端口号 执行器从9101开始往后写
+    port: 9999
+    # 执行器注册：默认IP:PORT
+    address:
+    # 执行器IP：默认自动获取IP
+    ip:
+    # 执行器运行日志文件存储磁盘路径
+    logpath: ./logs/xxl-job
+    # 执行器日志文件保存天数：大于3生效
+    logretentiondays: 30

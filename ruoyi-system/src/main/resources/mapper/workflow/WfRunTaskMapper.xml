@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.workflow.mapper.WfRunTaskMapper">
+
+
+    <select id="selectRunTaskList" resultType="com.ruoyi.workflow.domain.vo.WfTaskVo">
+        select tk.ID_ as taskId,tk.NAME_ as taskName, tk.PROC_INST_ID_ as procInsId, tk.ASSIGNEE_ as assigneeId, tk.CATEGORY_ as category
+        from ACT_RU_TASK tk
+        where PROC_INST_ID_ = #{procInsId}
+    </select>
+</mapper>
